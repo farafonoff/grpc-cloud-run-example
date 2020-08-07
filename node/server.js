@@ -50,12 +50,20 @@ function sumRunning(call, callback) {
 function fibonacci(call) {
   const request = call.request;
   const count = request.value;
+  const delay = 100;
   let state = [0, 1];
-  for(let i=0;i<count;++i) {
+  let index = 1;
+  let fibfunc = () => {
     call.write({ result: state[1] })
     state = [state[1], state[0] + state[1]];
-  }
-  call.end();
+    if (index < count) {
+      ++index;
+      setTimeout(fibfunc, delay)
+    } else {
+      call.end();
+    }
+  };
+  setTimeout(fibfunc, delay)
 }
 
 function main() {

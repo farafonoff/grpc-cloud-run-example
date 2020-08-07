@@ -22,5 +22,5 @@ set -x
 (cd "${LANGUAGE}"
   docker build --tag="${CONTAINER_TAG}" .
   docker push "${CONTAINER_TAG}"
-  gcloud run deploy --image="${CONTAINER_TAG}" --platform=managed --project=${GCP_PROJECT}
+  gcloud run deploy grpc-demo-server --region europe-west4 --image="${CONTAINER_TAG}" --platform=managed --project=${GCP_PROJECT}
 )

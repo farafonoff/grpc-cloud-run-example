@@ -15,6 +15,13 @@ message CalculationResult {
   float result = 1;
 };
 
+message Number {
+  float value = 1;
+};
+
 service Calculator {
   rpc Calculate (BinaryOperation) returns (CalculationResult);
+  rpc Sum(stream Number) returns (CalculationResult);
+  rpc Fibonacci(Number) returns (stream CalculationResult);
+  rpc SumRunning(stream Number) returns (stream CalculationResult);
 };
